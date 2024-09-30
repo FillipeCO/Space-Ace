@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-life = 10; 
+life = 20; 
 
 state = "comming";
 
@@ -53,7 +53,7 @@ state_machine = function()
 			}
 			else
 			{
-				state = "loading_shot"; //show_debug_message("cheguei");
+				state = "loading_shot";
 			}
 		}
 		// acabei o case
@@ -80,6 +80,7 @@ state_machine = function()
 			if (instance_exists(obj_player))
 			{
 				timer+= 1;
+				sound(snd_enemy3_shot, 0.2, 0.2);
 			
 				if (shot_timer >= shot_cooldown)
 				{
@@ -128,6 +129,7 @@ state_machine = function()
 				{
 					var _ang = 255
 					timer+= 1;
+					sound(snd_enemy3_shot, 0.2, 0.2);
 					
 					repeat(3)
 					{
@@ -181,7 +183,7 @@ dying = function()
 {
 	spring_effect(1.5, .5);
 	white_effect_timer(2);
-	sound(snd_enemy3_hit, .4);
+	sound(snd_enemy3_hit, 0.2, 0.5);
 	
 	if(life > 1)
 	{
@@ -189,14 +191,27 @@ dying = function()
 	}
 	else
 	{
+	
+		random_powerup_drop();
+
+		global.points += 100;
 		instance_destroy();
 		instance_create_layer(x,y, "particles", obj_enemy_explosion);
 		audio_play_sound(snd_enemy3_explosion, 1, 0, 1);
 		screen_shake(20);
 	}
-	
-	
+}
 
+// dying para usar com o "with" em outros objetos
+dies = function()
+{
+	random_powerup_drop();
+
+	instance_destroy();
+	instance_create_layer(x,y, "particles", obj_enemy_explosion);
+	audio_play_sound(snd_enemy3_explosion, 1, 0, 1);
+	global.points += 100;
+	screen_shake(20);
 }
 
 // se o inimigo está em uma sequencia

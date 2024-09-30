@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_missile",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":1.477029,
+  "name":"snd_missile",
+  "parent":{
+    "name":"Boss2",
+    "path":"folders/Sounds/Boss2.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_missile.wav",
+  "type":0,
+  "volume":1.0,
+}

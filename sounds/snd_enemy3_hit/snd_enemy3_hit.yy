@@ -12,8 +12,8 @@
   "duration":0.17898,
   "name":"snd_enemy3_hit",
   "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+    "name":"Enemy3",
+    "path":"folders/Sounds/Enemy3.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

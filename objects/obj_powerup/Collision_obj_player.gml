@@ -2,7 +2,24 @@
 // You can write your code in this editor
 instance_destroy();
 
-other.player_gain_powerup_level();
+powerup_types();
+//other.player_gain_powerup_level();
+if(other.shot_level > 3)
+{
+	global.powerup_text_type = "+ points";
+
+	global.points += 100;
+
+}
+else
+{
+	global.powerup_text_type = type;
+}
+
+
+
+create_powerup_text();
+
 
 var _particle = instance_create_layer(x, y, layer, obj_shot_particle);
 

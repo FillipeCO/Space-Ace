@@ -12,8 +12,8 @@
   "duration":0.653855,
   "name":"snd_enemy3_explosion",
   "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+    "name":"Enemy3",
+    "path":"folders/Sounds/Enemy3.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

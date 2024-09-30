@@ -5,6 +5,8 @@ alarm[0] = game_get_speed(gamespeed_fps) * 2;
 enemy1_shooting = function()
 {
     var _shot = instance_create_layer(x, y, "shots", obj_enemy1_shot);
+	
+	sound(snd_enemy_shot, 0.3, 1);
 
     // Define a velocidade do projétil
      _shot.vspeed = +3;
@@ -16,7 +18,6 @@ enemy1_shooting = function()
         if (y > room_height + 30)
         {
             instance_destroy();
-			show_debug_message("tiro destruido");
         }
     }
 }
@@ -24,14 +25,16 @@ enemy1_shooting = function()
 dying = function()
 {
 	getting_destroyed(obj_enemy_explosion);
+	screen_shake(5);
 	
-	sound(snd_enemy1_explosion, 0.4);
+	sound(snd_enemy1_explosion, 0.4, 2);
 	
 	var _drop_chance = random(100);
+	global.points += 10;
 	
-	if(_drop_chance > 1)
+	if(_drop_chance > 99)
 	{
-		instance_create_layer(x,y,layer,obj_powerup);
+		random_powerup_drop();
 	}
 }
 

@@ -12,8 +12,8 @@
   "duration":0.126667,
   "name":"snd_shot_hit",
   "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+    "name":"Player",
+    "path":"folders/Sounds/Player.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

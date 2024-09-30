@@ -2,6 +2,18 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 global.debug = false;
 
+// destino das transições
+global.destiny = rm_game;
+
+global.transition_is_in_progress = false;
+
+global.powerup_text_type = "Power Up";
+
+global.points = 0;
+
+global.boss_destroyed = false;
+
+global.highscore = 0;
 
 function getting_destroyed(_particle = obj_shot_particle)
 {
@@ -90,9 +102,57 @@ function draw_white_effect(_draw_function = draw_self())
 	}
 }
 
-function sound(_sound = snd_player_shot, _variation = .1)
+function sound(_sound = snd_player_shot, _variation = .1, _gain = 1)
 {
 	var _pitch = random_range(1- _variation, 1 + _variation);
 	
-	audio_play_sound(_sound, 0, 0, , , _pitch)
+	audio_play_sound(_sound, 0, 0, _gain, 0, _pitch);
+}
+
+function change_room_transition()
+{
+	room_goto(global.destiny);
+	
+	audio_stop_all();
+}
+
+function end_transition()
+{
+	global.transition_is_in_progress = false;
+}
+
+function random_powerup_drop()
+{
+	var _powerup_list = choose(obj_powerup, obj_powerup_life, obj_poweup_shield, obj_powerup_fire_rate);
+	
+	instance_create_layer(x,y,layer, _powerup_list);
+}
+
+function create_powerup_text()
+{
+	instance_create_layer(x,y,layer, obj_powerup_text);
+}
+
+function sequence_boss_destoyed()
+{
+	with(obj_boss)
+	{
+		instance_destroy();
+	}
+}
+
+function sequence_boss_destoyed_2()
+{
+	with(obj_boss_2)
+	{
+		instance_destroy();
+	}
+}
+
+function sequence_boss_destoyed_3()
+{
+	with(obj_boss_3)
+	{
+		instance_destroy();
+	}
 }

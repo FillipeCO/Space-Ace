@@ -1,14 +1,13 @@
 
-audio_stop_all();
-audio_play_sound(backgound_music, 0, 1, 0.2);
+
 
 #region variables
 
-vel = 2;
+vel = 3;
 
-player_lives = 5;
+player_lives = 1;
 
-player_shields = 3;
+player_shields = 1;
 
 active_player_shields = noone;
 
@@ -18,7 +17,7 @@ shot_timer = 0;
 
 shot_level = 1;
 
-invulnerability_time = game_get_speed(gamespeed_fps);
+invulnerability_time = game_get_speed(gamespeed_fps) / 2;
 
 timer_invulnerability = 0;
 
@@ -107,6 +106,13 @@ shooting_action = function()
 			
 			shoot_type3();
 		}
+		else if (shot_level == 4)
+		{
+				//aqui só ganha pontos, o tiro não muda
+				audio_play_sound(snd_player_shot_3, 1, 0, 0.3, 0, _pitch);
+			
+			shoot_type3();
+		}
 		
 		shot_timer = shot_cooldown;
         
@@ -162,7 +168,9 @@ shoot_type3 = function()
 
 player_gain_powerup_level = function()
 {
-	if(shot_level < 3) shot_level++;
+	if(shot_level < 4) shot_level++;
+	
+
 }
 
 player_looses_life = function()
@@ -170,6 +178,7 @@ player_looses_life = function()
 	if(timer_invulnerability > 0) return;
 	
 		screen_shake(10);
+		sound(snd_player_hit, 0.1, 1);
 		spring_effect(1.5, 1.2);
 		white_effect_timer(3);
 		
@@ -183,6 +192,11 @@ player_looses_life = function()
 		else
 		{
 			screen_shake(50);
+			instance_create_layer(x, y, "player", obj_player_destroyed);
+			sound(snd_player_explosion, 0.1, 1);
+			layer_sequence_create("transition", x, y, seq_transition);
+			global.destiny = rm_menu;
+			global.transition_is_in_progress = true;
 			instance_destroy();
 		}	
 }
@@ -193,9 +207,11 @@ player_uses_shield = function()
 	
 	if(player_shields > 0 and active_player_shields = noone)
 	{
+		sound(snd_shield, 0.2, 1);
+		
 		player_shields--;
 		
-		active_player_shields = instance_create_layer(x,y,"shields",obj_player_shield);
+		active_player_shields = instance_create_layer(x, y, "shields", obj_player_shield);
 	}
 }
 
@@ -225,5 +241,28 @@ checking_if_player_has_shield_active = function()
 	}	
 }
 
+player_gains_life = function()
+{
+	player_lives++;
+}
+
+player_gains_shield = function()
+{
+	player_shields++;
+}
+
+player_gain_fire_rate = function()
+{
+	if(shot_cooldown > 3)
+	{
+		shot_cooldown -= 2;
+	}
+	
+}
+
+player_in_sequence = in_sequence;
 
 #endregion
+
+layer_sequence_create("transition", x, y, seq_transition_2);
+global.destiny = rm_game;

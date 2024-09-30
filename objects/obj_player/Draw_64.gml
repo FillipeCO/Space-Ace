@@ -2,7 +2,9 @@
 // You can write your code in this editor
 
 
-if(global.debug) draw_text(20, 20, "Shot level: " + string(shot_level));
+
+
+if(global.transition_is_in_progress) exit;
 
 var _gui_height = display_get_gui_height();
 
